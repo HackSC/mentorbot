@@ -13,6 +13,12 @@
 		"description": "Fetches details of the specified Ruby gem"
 	},
 
+	"mentor": {
+        "alias": [  ],
+        "help": "mentor ???",
+        "description": "command example"
+    },
+
 	"error": {
 		"exclude": true
 	}

@@ -1,3 +1,4 @@
+from bottle import route, run
 import os
 import time
 from slackclient import SlackClient
@@ -11,6 +12,10 @@ EXAMPLE_COMMAND = "/<command>"
 
 # instantiate Slack client
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
+
+@route('/hello')
+def hello():
+    return "<h1>Hello World!</h1>"
 
 def handle_command(command, channel):
     """
@@ -41,6 +46,8 @@ def parse_slack_output(slack_rtm_output):
     return None, None
 
 if __name__ == "__main__":
+    # activates and runs the server 
+    run(host='0.0.0.0', port=8080)
     READ_WEBSOCKET_DELAY = 1 # 1 second delay between reading from firehose
     if slack_client.rtm_connect():
         print("StarterBot connected and running!")
@@ -51,3 +58,4 @@ if __name__ == "__main__":
             time.sleep(READ_WEBSOCKET_DELAY)
     else:
         print("Connection failed. Invalid Slack token or bot ID?")
+

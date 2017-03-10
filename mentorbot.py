@@ -8,7 +8,6 @@ BOT_ID = os.environ.get("BOT_ID")
 
 # instantiate Slack client
 sc = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
-print (os.environ.get('SLACK_BOT_TOKEN'))
 
 # channels
 channels = {}
@@ -20,10 +19,11 @@ def mentor():
     Usage: /mentor [category]
     Requests a mentor for a particular category.
     """
-    category = request.forms.get("text")
-    user = request.forms.get("user_name")
-    requestText = user + " is looking for a mentor for " + category + "! "
-    return sendMentorConfirm(channels["mentor"], requestText)
+    return sc.api_call("channels.list")
+    # category = request.forms.get("text")
+    # user = request.forms.get("user_name")
+    # requestText = user + " is looking for a mentor for " + category + "! "
+    # return sendMentorConfirm(channels["mentor"], requestText)
 
 @post('/test')
 def test():

@@ -37,7 +37,7 @@ def buttons():
     pp.pprint(payload)
     print ("callback_id " + callback_id)
     if callback_id == "mentor_confirm":
-        sendTextMessage(channels["mentor"], "got it. Your ID is " + payload["actions"]["value"])
+        sendTextMessage(channels["mentor"], "got it. Your ID is " + payload["actions"][0]["value"])
 
 @post('/test')
 def test():

@@ -1,6 +1,7 @@
 from bottle import route, run, get, post, request
 import os
 import time
+import json
 from slackclient import SlackClient
 
 # starterbot's ID as an environment variable
@@ -8,7 +9,10 @@ BOT_ID = os.environ.get("BOT_ID")
 
 # instantiate Slack client
 sc = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
+<<<<<<< HEAD
 print (os.environ.get('SLACK_BOT_TOKEN'))
+=======
+>>>>>>> dd4bf6be865ad7a3e11b6dcee7c2606dbc0f85c6
 
 # channels
 channels = {}
@@ -20,11 +24,10 @@ def mentor():
     Usage: /mentor [category]
     Requests a mentor for a particular category.
     """
-    return sc.api_call("channels.list")
-    # category = request.forms.get("text")
-    # user = request.forms.get("user_name")
-    # requestText = user + " is looking for a mentor for " + category + "! "
-    # return sendMentorConfirm(channels["mentor"], requestText)
+    category = request.forms.get("text")
+    user = request.forms.get("user_name")
+    requestText = user + " is looking for a mentor for " + category + "! "
+    return sendMentorConfirm(channels["mentor"], requestText)
 
 @post('/test')
 def test():

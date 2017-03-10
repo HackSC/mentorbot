@@ -39,10 +39,10 @@ def buttons():
         mentee_id = payload["actions"][0]["value"]
         mentor_id = payload["user"]["id"]
         sendTextMessage(channels["mentor"], "got it. Your ID is " + mentee_id)
-        sc.api_call(
+        print (sc.api_call(
             "mpim.open",
             users=mentee_id + "," + mentor_id + "," + BOT_ID
-        )
+        ))
 
 @post('/test')
 def test():

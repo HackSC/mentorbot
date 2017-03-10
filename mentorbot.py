@@ -15,9 +15,9 @@ def mentor():
     Usage: /mentor [category]
     Requests a mentor for a particular category.
     """
-    category = request.text
+    category = request.forms.get("text")
     print (category)
-    user = request.user_name
+    user = request.forms.get("user_name")
     print (user)
     requestText = user + " is looking for a mentor for " + category + "! "
     return sendMentorConfirm("#mentors", requestText)

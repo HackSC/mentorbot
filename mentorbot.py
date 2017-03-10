@@ -57,10 +57,10 @@ def buttons():
         """
         Change mentor status in database to "finished" and closes IM channel between mentor and mentee.
         """
-        sc.api_call(
+        print (sc.api_call(
             "mpip.close",
             channel=payload["channel"]["id"]
-        )
+        ))
 
 @post('/test')
 def test():

@@ -30,7 +30,7 @@ def mentor():
 def buttons():
     payload = json.loads(request.forms.get("payload"))
     print (type(payload))
-    callback_id = payload.callback_id
+    callback_id = payload["callback_id"]
     print ("callback_id " + callback_id)
     if callback_id == "mentor_confirm":
         sendTextMessage(channels["mentor"], "got it")

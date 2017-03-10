@@ -4,10 +4,11 @@ import time
 from slackclient import SlackClient
 
 # starterbot's ID as an environment variable
-# BOT_ID = os.environ.get("BOT_ID")
+BOT_ID = os.environ.get("BOT_ID")
 
 # instantiate Slack client
 sc = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
+print (os.environ.get('SLACK_BOT_TOKEN'))
 
 # channels
 channels = {}

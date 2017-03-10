@@ -28,8 +28,8 @@ def mentor():
 
 @post('/buttons')
 def buttons():
-    payload = request.forms.get("payload")
-    print type(payload)
+    payload = json.loads(request.forms.get("payload"))
+    print (type(payload))
     callback_id = payload.callback_id
     print ("callback_id " + callback_id)
     if callback_id == "mentor_confirm":

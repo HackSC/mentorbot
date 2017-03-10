@@ -26,6 +26,7 @@ def mentor():
     category = request.forms.get("text")
     user = request.forms.get("user_name")
     user_id = request.forms.get("user_id")
+    print ("your user ID is: " + user_id)
     requestText = user + " is looking for a mentor for " + category + "! "
     sendMentorConfirm(channels["mentor"], requestText, user_id)
 
@@ -37,7 +38,7 @@ def buttons():
     pp.pprint(payload)
     print ("callback_id " + callback_id)
     if callback_id == "mentor_confirm":
-        sendTextMessage(channels["mentor"], "got it. Your ID is " + payload["actions"][0]["value"])
+        sendTextMessage(channels["mentor"], "got it. Your ID is " + payload["original_message"]["attachments"][0]["mentee_id"])
 
 @post('/test')
 def test():
@@ -56,6 +57,7 @@ def sendTextMessage(channel, text):
     )
 
 def sendMentorConfirm(channel, text, user_id):
+    print ("user id is " + user_id)
     return sc.api_call(
         "chat.postMessage",
         channel=channel,
@@ -68,13 +70,14 @@ def sendMentorConfirm(channel, text, user_id):
                 "fallback":"You are unable to choose an option",
                 "callback_id":"mentor_confirm",
                 "color":"#3AA3E3",
+                "mentee_id":user_id,
                 "attachment_type":"default",
                 "actions":[
                     {
                         "name":"mentor confirm",
                         "text":"Yay",
                         "type":"button",
-                        "value":user_id
+                        "value":True
                     }
                 ]
             }

@@ -22,8 +22,13 @@ def mentor():
     """
     category = request.forms.get("text")
     user = request.forms.get("user_name")
+    userID = request.forms.get("user_id")
     requestText = user + " is looking for a mentor for " + category + "! "
-    return sendMentorConfirm(channels["mentor"], requestText)
+    sendMentorConfirm(channels["mentor"], requestText)
+
+@post('/buttons')
+def buttons():
+    return request.body.read()
 
 @post('/test')
 def test():
@@ -61,12 +66,6 @@ def sendMentorConfirm(channel, text):
                         "text":"Yay",
                         "type":"button",
                         "value":True
-                    },
-                    {
-                        "name":"mentor confirm",
-                        "text":"Nay",
-                        "type":"button",
-                        "value":False
                     }
                 ]
             }

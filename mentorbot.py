@@ -22,7 +22,7 @@ def mentor():
     """
     category = request.forms.get("text")
     user = request.forms.get("user_name")
-    userID = request.forms.get("user_id")
+    user_id = request.forms.get("user_id")
     requestText = user + " is looking for a mentor for " + category + "! "
     sendMentorConfirm(channels["mentor"], requestText)
 
@@ -31,6 +31,7 @@ def buttons():
     payload = json.loads(request.forms.get("payload"))
     print (type(payload))
     callback_id = payload["callback_id"]
+    pp.pprint(payload)
     print ("callback_id " + callback_id)
     if callback_id == "mentor_confirm":
         sendTextMessage(channels["mentor"], "got it")

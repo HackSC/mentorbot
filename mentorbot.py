@@ -41,7 +41,7 @@ def buttons():
         sendTextMessage(channels["mentor"], "got it. Your ID is " + mentee_id)
         sc.api_call(
             "mpim.open",
-            users=mentee_id + "," + mentor_id
+            users=mentee_id + "," + mentor_id + "," + BOT_ID
         )
 
 @post('/test')

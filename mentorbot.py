@@ -9,6 +9,10 @@ from slackclient import SlackClient
 # instantiate Slack client
 sc = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 
+# channels
+channels = {}
+channels["mentor"] = "#dev-mentor-slackbot"
+
 @post('/mentor')
 def mentor():
     """
@@ -18,7 +22,7 @@ def mentor():
     category = request.forms.get("text")
     user = request.forms.get("user_name")
     requestText = user + " is looking for a mentor for " + category + "! "
-    return sendMentorConfirm("#mentors", requestText)
+    return sendMentorConfirm(channels["mentor"], requestText)
 
 @post('/test')
 def test():

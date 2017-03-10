@@ -29,6 +29,7 @@ def mentor():
 @post('/buttons')
 def buttons():
     callback_id = request.forms.get("callback_id")
+    print (callback_id)
     if callback_id == "mentor_confirm":
         sendTextMessage(channels["mentor"], "got it")
 

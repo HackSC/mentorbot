@@ -55,7 +55,7 @@ def sendTextMessage(channel, text):
         as_user=True
     )
 
-def sendMentorConfirm(channel, text):
+def sendMentorConfirm(channel, text, user_id):
     return sc.api_call(
         "chat.postMessage",
         channel=channel,
@@ -69,13 +69,12 @@ def sendMentorConfirm(channel, text):
                 "callback_id":"mentor_confirm",
                 "color":"#3AA3E3",
                 "attachment_type":"default",
-                "mentee_id":user_id,
                 "actions":[
                     {
                         "name":"mentor confirm",
                         "text":"Yay",
                         "type":"button",
-                        "value":True
+                        "value":user_id
                     }
                 ]
             }

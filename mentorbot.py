@@ -28,8 +28,8 @@ def mentor():
 
 @post('/buttons')
 def buttons():
-    return json.loads(request.body.read())
-    callback_id = payload.
+    return json.loads(request.body.read().encode("ascii"))
+    callback_id = payload
     print (callback_id)
     if callback_id == "mentor_confirm":
         sendTextMessage(channels["mentor"], "got it")

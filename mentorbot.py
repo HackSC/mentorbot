@@ -4,7 +4,7 @@ import time
 from slackclient import SlackClient
 
 # starterbot's ID as an environment variable
-BOT_ID = os.environ.get("BOT_ID")
+# BOT_ID = os.environ.get("BOT_ID")
 
 # instantiate Slack client
 sc = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
@@ -15,13 +15,10 @@ def mentor():
     Usage: /mentor [category]
     Requests a mentor for a particular category.
     """
-    return request.forms.get("text") + " from " + request.forms.get("user_name")
-    # category = request.forms.get("text")
-    # print (category)
-    # user = request.forms.get("user_name")
-    # print (user)
-    # requestText = user + " is looking for a mentor for " + category + "! "
-    # return sendMentorConfirm("#mentors", requestText)
+    category = request.forms.get("text")
+    user = request.forms.get("user_name")
+    requestText = user + " is looking for a mentor for " + category + "! "
+    return sendMentorConfirm("#mentors", requestText)
 
 @post('/test')
 def test():

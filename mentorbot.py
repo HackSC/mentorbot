@@ -28,7 +28,7 @@ def mentor():
 
 @post('/buttons')
 def buttons():
-    return json.loads(request.body.read().encode("ascii"))
+    return request
     callback_id = payload
     print (callback_id)
     if callback_id == "mentor_confirm":

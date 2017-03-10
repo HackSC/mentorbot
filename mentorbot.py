@@ -48,7 +48,7 @@ def buttons():
         print (sc.api_call(
             "chat.update",
             ts=message_ts,
-            channel=channels["mentor"],
+            channel=payload["channel"]["id"],
             text="Assigned" + mentor_name + " to: " + payload["original_message"]["text"],
             as_user=True,
             attachments=[]

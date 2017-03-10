@@ -18,7 +18,7 @@ def mentor():
     category = request.text
     user = request.user_name
     requestText = user + " is looking for a mentor for " + category + "! "
-    sendTextMessage("#mentors", requestText)
+    sendMentorConfirm("#dev-mentor-slackbot", requestText)
 
 @route('/hello')
 def hello():
@@ -43,7 +43,7 @@ def sendMentorConfirm(channel, text):
             {
                 "text":"Choose an action",
                 "fallback":"You are unable to choose an option",
-                "callback_id":"lunch_intro",
+                "callback_id":"mentor_confirm",
                 "color":"#3AA3E3",
                 "attachment_type":"default",
                 "actions":[
@@ -66,5 +66,5 @@ def sendMentorConfirm(channel, text):
 
 if __name__ == "__main__":
     # activates and runs the server
-    sendMentorConfirm("#bot_testing", "hello")
+    sendMentorConfirm("#dev-mentor-slackbot", "hello")
     run(host='0.0.0.0', port=8080)

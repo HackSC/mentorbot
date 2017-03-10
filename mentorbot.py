@@ -2,6 +2,7 @@ from bottle import route, run, get, post, request
 import os
 import time
 import json
+import urlparse
 from slackclient import SlackClient
 
 # starterbot's ID as an environment variable
@@ -28,7 +29,7 @@ def mentor():
 
 @post('/buttons')
 def buttons():
-    return request
+    return request.forms.get("payload")
     callback_id = payload
     print (callback_id)
     if callback_id == "mentor_confirm":

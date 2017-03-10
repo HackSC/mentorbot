@@ -9,10 +9,6 @@ BOT_ID = os.environ.get("BOT_ID")
 
 # instantiate Slack client
 sc = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
-<<<<<<< HEAD
-print (os.environ.get('SLACK_BOT_TOKEN'))
-=======
->>>>>>> dd4bf6be865ad7a3e11b6dcee7c2606dbc0f85c6
 
 # channels
 channels = {}

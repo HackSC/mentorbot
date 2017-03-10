@@ -36,7 +36,13 @@ def buttons():
     callback_id = payload["callback_id"]
     pp.pprint(payload)
     if callback_id == "mentor_confirm":
-        sendTextMessage(channels["mentor"], "got it. Your ID is " + payload["original_message"]["attachments"][0]["mentee_id"])
+        mentee_id = payload["actions"][0]["value"]
+        mentor_id = payload["user"]["id"]
+        sendTextMessage(channels["mentor"], "got it. Your ID is " + user_id)
+        sc.api_call(
+            "mpim.open",
+            users=mentee_id + "," + mentor_id
+        )
 
 @post('/test')
 def test():

@@ -45,14 +45,14 @@ def buttons():
             users=mentee_id + "," + mentor_id + "," + BOT_ID
         ))
         sendTextMessage(new_im["group"]["name"], "Hey there! " + mentor_name + " will be able to help you.")
-        print sc.api_call(
+        print (sc.api_call(
             "chat.update",
             ts=message_ts,
             channel=channels["mentor"],
             text="Assigned" + mentor_name + " to: " + payload["original_message"]["text"],
             as_user=True,
             attachments=[]
-        )
+        ))
 
 @post('/test')
 def test():

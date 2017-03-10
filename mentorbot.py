@@ -2,7 +2,10 @@ from bottle import route, run, get, post, request
 import os
 import time
 import json
+import pprint
 from slackclient import SlackClient
+
+pp = pprint.PrettyPrinter(indent=1)
 
 # starterbot's ID as an environment variable
 BOT_ID = os.environ.get("BOT_ID")

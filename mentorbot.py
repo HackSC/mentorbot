@@ -15,12 +15,13 @@ def mentor():
     Usage: /mentor [category]
     Requests a mentor for a particular category.
     """
-    category = request.forms.get("text")
-    print (category)
-    user = request.forms.get("user_name")
-    print (user)
-    requestText = user + " is looking for a mentor for " + category + "! "
-    return sendMentorConfirm("#mentors", requestText)
+    return sendTextMessage("#dev-mentor-slackbot", "it works")
+    # category = request.forms.get("text")
+    # print (category)
+    # user = request.forms.get("user_name")
+    # print (user)
+    # requestText = user + " is looking for a mentor for " + category + "! "
+    # return sendMentorConfirm("#mentors", requestText)
 
 @post('/test')
 def test():

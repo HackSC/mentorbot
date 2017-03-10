@@ -18,7 +18,7 @@ def mentor():
     category = request.text
     user = request.user_name
     requestText = user + " is looking for a mentor for " + category + "! "
-    sendMentorConfirm("#mentors", requestText)
+    return sendMentorConfirm("#mentors", requestText)
 
 @post('/test')
 def test():

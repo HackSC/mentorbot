@@ -18,7 +18,11 @@ def mentor():
     category = request.text
     user = request.user_name
     requestText = user + " is looking for a mentor for " + category + "! "
-    sendMentorConfirm("#dev-mentor-slackbot", requestText)
+    sendMentorConfirm("#mentors", requestText)
+
+@post('/test')
+def test():
+    return "<p>post received<p>"
 
 @route('/hello')
 def hello():
@@ -66,5 +70,4 @@ def sendMentorConfirm(channel, text):
 
 if __name__ == "__main__":
     # activates and runs the server
-    sendMentorConfirm("#dev-mentor-slackbot", "hello")
     run(host='0.0.0.0', port=8080)

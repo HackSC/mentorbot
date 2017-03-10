@@ -15,7 +15,7 @@ def mentor():
     Usage: /mentor [category]
     Requests a mentor for a particular category.
     """
-    return request.body.read()
+    return SLACK_BOT_TOKEN
     # category = request.forms.get("text")
     # print (category)
     # user = request.forms.get("user_name")

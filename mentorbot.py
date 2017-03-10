@@ -47,7 +47,7 @@ def sendMentorConfirm(channel, text):
         channel=channel,
         text=text,
         as_user=True,
-        attachments=
+        attachments=json.dumps(
         [
             {
                 "text":"Choose an action",
@@ -70,7 +70,7 @@ def sendMentorConfirm(channel, text):
                     }
                 ]
             }
-        ]
+        ])
     )
 
 if __name__ == "__main__":

@@ -16,7 +16,9 @@ def mentor():
     Requests a mentor for a particular category.
     """
     category = request.text
+    print category
     user = request.user_name
+    print user
     requestText = user + " is looking for a mentor for " + category + "! "
     return sendMentorConfirm("#mentors", requestText)
 

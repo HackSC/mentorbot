@@ -38,12 +38,12 @@ def buttons():
     if callback_id == "mentor_confirm":
         mentee_id = payload["actions"][0]["value"]
         mentor_id = payload["user"]["id"]
-        sendTextMessage(channels["mentor"], "got it. Your ID is " + mentee_id)
+        mentor_name = payload["user"]["name"]
         new_im = (sc.api_call(
             "mpim.open",
             users=mentee_id + "," + mentor_id + "," + BOT_ID
         ))
-        sendTextMessage(new_im["name"], "Hello!")
+        sendTextMessage(new_im["group"]["name"], "Hey there! " + mentor_name + " will be able to help you.")
 
 @post('/test')
 def test():

@@ -31,15 +31,22 @@ def mentor():
 
 @post('/buttons')
 def buttons():
+    """
+    Callback URL for interactive buttons.
+    """
     payload = json.loads(request.forms.get("payload"))
-    print (type(payload))
     callback_id = payload["callback_id"]
-    pp.pprint(payload)
     message_ts = payload["message_ts"]
     mentee_id = payload["actions"][0]["value"]
     mentor_id = payload["user"]["id"]
     mentor_name = payload["user"]["name"]
     if callback_id == "mentor_confirm":
+        """
+        Called when a mentor accepts a mentee's help request. Opens a
+        multi-party message between the mentee, mentor, and the slackbot.
+        Change mentor status to "checked-in" in the database if they have not
+        done so yet.
+        """
         new_im = (sc.api_call(
             "mpim.open",
             users=mentee_id + "," + mentor_id + "," + BOT_ID
@@ -70,15 +77,10 @@ def buttons():
             attachments=[]
         )
 
-@post('/test')
-def test():
-    return "<p>post received<p>"
-
-@route('/hello')
-def hello():
-    return "<h1>Hello World!</h1>"
-
 def sendTextMessage(channel, text):
+    """
+    Sends text message to specific channel.
+    """
     return sc.api_call(
         "chat.postMessage",
         channel=channel,
@@ -87,6 +89,9 @@ def sendTextMessage(channel, text):
     )
 
 def sendMentorConfirm(channel, text, user_id):
+    """
+    Sends a one-button help request confirmation message to a channel.
+    """
     return sc.api_call(
         "chat.postMessage",
         channel=channel,
@@ -113,6 +118,10 @@ def sendMentorConfirm(channel, text, user_id):
     )
 
 def sendMentorFinish(channel, text):
+    """
+    Sends a message with a "done" button allowing mentor/mentee to close the
+    thread. Mentor status will now be set as "free" in database.
+    """
     return sc.api_call(
         "chat.postMessage",
         channel=channel,

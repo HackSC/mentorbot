@@ -49,7 +49,7 @@ def buttons():
             "chat.update",
             ts=message_ts,
             channel=payload["channel"]["id"],
-            text="Assigned" + mentor_name + " to: " + payload["original_message"]["text"],
+            text="*Assigned* " + mentor_name + " to: " + payload["original_message"]["text"],
             as_user=True,
             attachments=[]
         ))

@@ -35,17 +35,17 @@ def buttons():
     print (type(payload))
     callback_id = payload["callback_id"]
     pp.pprint(payload)
+    message_ts = payload["message_ts"]
+    mentee_id = payload["actions"][0]["value"]
+    mentor_id = payload["user"]["id"]
+    mentor_name = payload["user"]["name"]
     if callback_id == "mentor_confirm":
-        message_ts = payload["message_ts"]
-        mentee_id = payload["actions"][0]["value"]
-        mentor_id = payload["user"]["id"]
-        mentor_name = payload["user"]["name"]
         new_im = (sc.api_call(
             "mpim.open",
             users=mentee_id + "," + mentor_id + "," + BOT_ID
         ))
-        sendTextMessage(new_im["group"]["name"], "Hey there! " + mentor_name + " will be able to help you.")
-        print (sc.api_call(
+        sendMentorFinish(new_im["group"]["name"], "Hey there! " + mentor_name + " will be able to help you.")
+        (sc.api_call(
             "chat.update",
             ts=message_ts,
             channel=payload["channel"]["id"],
@@ -53,6 +53,14 @@ def buttons():
             as_user=True,
             attachments=[]
         ))
+    elif callback_id == "mentor_finish":
+        """
+        Change mentor status in database to "finished" and closes IM channel between mentor and mentee.
+        """
+        sc.api_call(
+            "mpip.close",
+            channel=payload["channel"]["id"]
+        )
 
 @post('/test')
 def test():
@@ -90,6 +98,32 @@ def sendMentorConfirm(channel, text, user_id):
                         "text":"Yay",
                         "type":"button",
                         "value":user_id
+                    }
+                ]
+            }
+        ])
+    )
+
+def sendMentorFinish(channel, text):
+    return sc.api_call(
+        "chat.postMessage",
+        channel=channel,
+        text=text,
+        as_user=True,
+        attachments=json.dumps(
+        [
+            {
+                "text":"When you guys are finished, feel free to click the button below.",
+                "fallback":"You are unable to choose an option",
+                "callback_id":"mentor_finish",
+                "color":"#3AA3E3",
+                "attachment_type":"default",
+                "actions":[
+                    {
+                        "name":"mentor finish",
+                        "text":"Done!",
+                        "type":"button",
+                        "value":True
                     }
                 ]
             }

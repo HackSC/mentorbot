@@ -36,6 +36,7 @@ def buttons():
     callback_id = payload["callback_id"]
     pp.pprint(payload)
     if callback_id == "mentor_confirm":
+        message_ts = payload["message_ts"]
         mentee_id = payload["actions"][0]["value"]
         mentor_id = payload["user"]["id"]
         mentor_name = payload["user"]["name"]
@@ -44,6 +45,11 @@ def buttons():
             users=mentee_id + "," + mentor_id + "," + BOT_ID
         ))
         sendTextMessage(new_im["group"]["name"], "Hey there! " + mentor_name + " will be able to help you.")
+        sc.api_call(
+            ts=message_ts,
+            channel=channels["mentor"],
+            text="Assigned" + mentor_name + " to: " + payload["original_message"]["text"]
+        )
 
 @post('/test')
 def test():

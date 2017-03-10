@@ -45,22 +45,30 @@ def buttons():
             users=mentee_id + "," + mentor_id + "," + BOT_ID
         ))
         sendMentorFinish(new_im["group"]["name"], "Hey there! " + mentor_name + " will be able to help you.")
-        (sc.api_call(
+        sc.api_call(
             "chat.update",
             ts=message_ts,
             channel=payload["channel"]["id"],
             text="*Assigned* " + mentor_name + " to: " + payload["original_message"]["text"],
             as_user=True,
             attachments=[]
-        ))
+        )
     elif callback_id == "mentor_finish":
         """
         Change mentor status in database to "finished" and closes IM channel between mentor and mentee.
         """
-        print (sc.api_call(
+        sc.api_call(
             "mpim.close",
             channel=payload["channel"]["id"]
-        ))
+        )
+        sc.api_call(
+            "chat.update",
+            ts=message_ts,
+            channel=payload["channel"]["id"],
+            text="We hope we were able to help you! This thread is now closed.",
+            as_user=True,
+            attachments=[]
+        )
 
 @post('/test')
 def test():

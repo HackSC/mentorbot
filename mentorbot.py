@@ -100,7 +100,7 @@ def sendMentorConfirm(channel, text, user_id):
         attachments=json.dumps(
         [
             {
-                "text":"Choose an action",
+                "text":"If you feel like you're the right person to take this person's issue, press the button below and we'll setup a chatroom between you two.",
                 "fallback":"You are unable to choose an option",
                 "callback_id":"mentor_confirm",
                 "color":"#3AA3E3",
@@ -108,7 +108,7 @@ def sendMentorConfirm(channel, text, user_id):
                 "actions":[
                     {
                         "name":"mentor confirm",
-                        "text":"Yay",
+                        "text":"Take this job!",
                         "type":"button",
                         "value":user_id
                     }

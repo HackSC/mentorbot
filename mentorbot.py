@@ -15,7 +15,7 @@ sc = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 
 # channels
 channels = {}
-channels["mentor"] = "#dev-mentor-slackbot"
+channels["mentor"] = "#developers"
 
 @post('/mentor')
 def mentor():

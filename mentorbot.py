@@ -61,6 +61,8 @@ def mentor():
 @post('/sudo')
 def sudo():
     """
+    Usage: /sudo [username]
+    This is an admin-only command. Using this will add another admin.
     """
     caller = request.forms.get("user_name")
     if caller not in admins:
@@ -78,6 +80,9 @@ def sudo():
 @post('/addmentor')
 def addMentor():
     """
+    Usage: /addmentor [username]
+    This is an admin-only command. This adds a person with [username] to a
+    list of registered mentors and can now accept/deal with help tickets.
     """
     caller = request.forms.get("user_name")
     if caller not in admins:
@@ -107,6 +112,10 @@ def addMentor():
 @post('/setmentorchannel')
 def setMentorChannel():
     """
+    Usage: /setmentorchannel [channel]
+    This is an admin-only command. This sets the slack channel in which
+    help tickets are ushered into, and where mentors can choose to pick up
+    tickets. 
     """
     caller = request.forms.get("user_name")
     if caller not in admins:

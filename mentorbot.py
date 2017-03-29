@@ -85,14 +85,14 @@ def addMentor():
     caller = request.forms.get("user_name")
     if caller not in admins:
         return "You do not have permission to use this command."
-        
+
     mentor = request.forms.get("text")
     channel_id = request.forms.get("channel_id")
-    sc.api_call(
+    print(sc.api_call(
         "channels.invite",
         channel=channels["mentor"],
         user=mentor
-    )
+    ))
     if mentor in getUsers():
         mentors.append(mentor);
         sendTextMessage(channel_id, "Successfully added *" + mentor + "* to the list of mentors!")

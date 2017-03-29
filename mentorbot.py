@@ -72,7 +72,7 @@ def setMentorChannel():
     user_id = request.forms.get("user_id")
     channel_id = request.forms.get("channel_id")
     channelsList = sc.api_call(channels.list)
-    print channelsList
+    print (channelsList)
     if mentorChannel not in channelsList:
         sendTextMessage(channel_id, "The channel *" + mentorChannel + "* does not exist!")
     else:

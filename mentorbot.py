@@ -17,6 +17,9 @@ sc = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 channels = {}
 channels["mentor"] = "#bot_testing_channel"
 
+# List of admins
+admins = ['sampurna']
+
 # List of all mentors
 mentors = []
 
@@ -25,6 +28,26 @@ activeMentors = []
 
 # List of busy mentors
 busyMentors = []
+
+def getUsers():
+    users = sc.api_call("users.list")
+    usernames = []
+    for user in users['members']:
+        usernames.append(user['name'])
+    return usernames;
+
+def getChannels():
+    channelsList = sc.api_call("channels.list")["channels"]
+    channelNames = []
+    for channel in channelsList:
+        channelNames.append(channel["name"])
+    return channelNames;
+
+def validUser(user):
+    if user in getUsers():
+        return True
+    else:
+        return False
 
 @post('/mentor')
 def mentor():
@@ -38,6 +61,20 @@ def mentor():
     requestText = user + " is looking for a mentor for " + category + "! "
     sendMentorConfirm(channels["mentor"], requestText, user_id)
 
+@post('/sudo')
+def sudo():
+    """
+    """
+    newAdmin = request.forms.get("text")
+    channel_id = request.forms.get("channel_id")
+    if validUser(newAdmin):
+        admins.append("newAdmin")
+        sendTextMessage(channel_id, "*" + newAdmin + "* has been given admin privileges.")
+        print("Current admins are: ")
+        print(admins)
+    else:
+        sendTextMessage(channel_id, "*" + newAdmin + "* is not an existing user!")
+
 @post('/addmentor')
 def addMentor():
     """
@@ -49,11 +86,7 @@ def addMentor():
         channel=channels["mentor"],
         user=mentor
     )
-    users = sc.api_call("users.list")
-    usernames = []
-    for user in users['members']:
-        usernames.append(user['name'])
-    if mentor in usernames:
+    if mentor in getUsers():
         mentors.append(mentor);
         sendTextMessage(channel_id, "Successfully added *" + mentor + "* to the list of mentors!")
         sendTextMessage(channel_id, "Current mentors are: " + str(mentors))
@@ -72,9 +105,7 @@ def setMentorChannel():
     user_id = request.forms.get("user_id")
     channel_id = request.forms.get("channel_id")
     channelsList = sc.api_call("channels.list")["channels"]
-    channelNames = []
-    for channel in channelsList:
-        channelNames.append(channel["name"])
+    channelNames = getChannels();
     print (channelNames)
     if mentorChannel not in channelNames:
         sendTextMessage(channel_id, "The channel *" + mentorChannel + "* does not exist!")

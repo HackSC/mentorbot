@@ -98,6 +98,7 @@ def addMentor():
         sendTextMessage(channel_id, "Successfully added *" + mentor + "* to the list of mentors!")
         sendTextMessage(channel_id, "Current mentors are: " + str(mentors))
         print("Adding " + mentor + " to list of mentors.")
+        return "Make sure to invite *" + mentor + "* to #" + channels["mentor"] + "as well."
     else:
         sendTextMessage(channel_id, "Sorry, the user *" + mentor + "* does not exist!")
         print("Attempted to add " + mentor + " to list of mentors but user does not exist")
@@ -122,6 +123,7 @@ def setMentorChannel():
     else:
         channels["mentor"] = "#" + mentorChannel
         sendTextMessage(channel_id, "Mentor channel successfully set to *" + mentorChannel + "*!")
+        return "Make sure that you have invited the mentorbot to the channel, otherwise it cannot post messages."
 
 @post('/buttons')
 def buttons():

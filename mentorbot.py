@@ -17,6 +17,15 @@ sc = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 channels = {}
 channels["mentor"] = "#developers"
 
+# List of all mentors
+mentors = []
+
+# List of active mentors
+activeMentors = []
+
+# List of busy mentors
+busyMentors = []
+
 @post('/mentor')
 def mentor():
     """
@@ -28,6 +37,32 @@ def mentor():
     user_id = request.forms.get("user_id")
     requestText = user + " is looking for a mentor for " + category + "! "
     sendMentorConfirm(channels["mentor"], requestText, user_id)
+
+@post('/addmentor')
+def addMentor():
+    """
+    """
+    mentor = request.forms.get("text")
+    mentors.append(mentor);
+    sc.api_call(
+        "channels.invite",
+        channel=channels["mentor"],
+        user=mentor
+    )
+
+@post('/setmentorchannel')
+def setMentorChannel():
+    """
+    """
+    mentorChannel = request.forms.get("text")
+    user_id = request.forms.get("user_id")
+    channel_id = request.forms.get("channel_id")
+    channels = sc.api_call(channels.list)
+    if mentorChannel not in channels:
+        sendTextMessage(channel_id, "The channel *" + mentorChannel + "* does not exist!")
+    else:
+        channels["mentor"] = "#" + mentorChannel
+        sendTextMessage(channel_id, "Mentor channel successfully set to *" + mentorChannel + "*!")
 
 @post('/buttons')
 def buttons():

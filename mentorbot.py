@@ -49,6 +49,8 @@ def addMentor():
         channel=channels["mentor"],
         user=mentor
     )
+    print("Adding " + mentor + " to list of mentors.")
+    print(mentors)
 
 @post('/setmentorchannel')
 def setMentorChannel():

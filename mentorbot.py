@@ -67,6 +67,9 @@ def sudo():
     """
     newAdmin = request.forms.get("text")
     channel_id = request.forms.get("channel_id")
+    caller = request.forms.get("user_name")
+    if caller not in admins:
+        return "You do not have permission to use this command."
     if validUser(newAdmin):
         admins.append("newAdmin")
         sendTextMessage(channel_id, "*" + newAdmin + "* has been given admin privileges.")

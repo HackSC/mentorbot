@@ -49,6 +49,7 @@ def addMentor():
         channel=channels["mentor"],
         user=mentor
     )
+    print(sc.api_call("users.list"))
     print("Adding " + mentor + " to list of mentors.")
     print(mentors)
 

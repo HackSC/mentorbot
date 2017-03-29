@@ -18,7 +18,7 @@ channels = {}
 channels["mentor"] = "#bot_testing_channel"
 
 # List of admins
-admins = ['sampurna']
+admins = ['sampurna', 'jaminche']
 
 # List of all mentors
 mentors = []
@@ -65,11 +65,11 @@ def mentor():
 def sudo():
     """
     """
-    newAdmin = request.forms.get("text")
-    channel_id = request.forms.get("channel_id")
     caller = request.forms.get("user_name")
     if caller not in admins:
         return "You do not have permission to use this command."
+    newAdmin = request.forms.get("text")
+    channel_id = request.forms.get("channel_id")
     if validUser(newAdmin):
         admins.append("newAdmin")
         sendTextMessage(channel_id, "*" + newAdmin + "* has been given admin privileges.")
@@ -82,6 +82,10 @@ def sudo():
 def addMentor():
     """
     """
+    caller = request.forms.get("user_name")
+    if caller not in admins:
+        return "You do not have permission to use this command."
+        
     mentor = request.forms.get("text")
     channel_id = request.forms.get("channel_id")
     sc.api_call(
@@ -104,6 +108,9 @@ def addMentor():
 def setMentorChannel():
     """
     """
+    caller = request.forms.get("user_name")
+    if caller not in admins:
+        return "You do not have permission to use this command."
     mentorChannel = request.forms.get("text")
     user_id = request.forms.get("user_id")
     channel_id = request.forms.get("channel_id")

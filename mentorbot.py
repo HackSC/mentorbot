@@ -50,10 +50,11 @@ def addMentor():
         user=mentor
     )
     users = sc.api_call("users.list")
-    pp.pprint(users)
+    #pp.pprint(users)
+    usernames = []
     for user in users["members"]:
         usernames.append(user.name)
-    #print (usernames)
+    print (usernames)
     print("Adding " + mentor + " to list of mentors.")
     print(mentors)
 

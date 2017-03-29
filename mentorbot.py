@@ -26,9 +26,6 @@ mentors = []
 # List of active mentors
 activeMentors = []
 
-# List of busy mentors
-busyMentors = []
-
 def getUsers():
     users = sc.api_call("users.list")
     usernames = []
@@ -100,7 +97,7 @@ def addMentor():
         sendTextMessage(channel_id, "Successfully added *" + mentor + "* to the list of mentors!")
         sendTextMessage(channel_id, "Current mentors are: " + str(mentors))
         print("Adding " + mentor + " to list of mentors.")
-        return "Make sure to invite *" + mentor + "* to #" + channels["mentor"] + "as well."
+        return "Make sure to invite *" + mentor + "* to " + channels["mentor"] + " as well."
     else:
         sendTextMessage(channel_id, "Sorry, the user *" + mentor + "* does not exist!")
         print("Attempted to add " + mentor + " to list of mentors but user does not exist")
@@ -121,7 +118,7 @@ def setMentorChannel():
     channelNames = getChannels();
     print (channelNames)
     if mentorChannel not in channelNames:
-        sendTextMessage(channel_id, "The channel *" + mentorChannel + "* does not exist!")
+        return "The channel *" + mentorChannel + "* does not exist!"
     else:
         channels["mentor"] = "#" + mentorChannel
         sendTextMessage(channel_id, "Mentor channel successfully set to *" + mentorChannel + "*!")
@@ -174,6 +171,7 @@ def buttons():
             as_user=True,
             attachments=[]
         )
+
 
 def sendTextMessage(channel, text):
     """

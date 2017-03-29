@@ -43,19 +43,24 @@ def addMentor():
     """
     """
     mentor = request.forms.get("text")
-    mentors.append(mentor);
+    channel_id = request.forms.get("channel_id")
     sc.api_call(
         "channels.invite",
         channel=channels["mentor"],
         user=mentor
     )
     users = sc.api_call("users.list")
-    #pp.pprint(users)
     usernames = []
     for user in users['members']:
         usernames.append(user['name'])
-    print (usernames)
-    print("Adding " + mentor + " to list of mentors.")
+    if mentor in usernames:
+        mentors.append(mentor);
+        sendTextMessage(channel_id, "Successfully added *" + mentor + "* to the list of mentors!")
+        print("Adding " + mentor + " to list of mentors.")
+    else:
+        sendTextMessage(channel_id, "Sorry, the user *" + mentor + "* does not exist!")
+        print("Attempted to add " + mentor + " to list of mentors but user does not exist")
+    print("Current mentors:")
     print(mentors)
 
 @post('/setmentorchannel')

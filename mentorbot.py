@@ -56,6 +56,7 @@ def addMentor():
     if mentor in usernames:
         mentors.append(mentor);
         sendTextMessage(channel_id, "Successfully added *" + mentor + "* to the list of mentors!")
+        sendTextMessage(channel_id, "Current mentors are: " + str(mentors))
         print("Adding " + mentor + " to list of mentors.")
     else:
         sendTextMessage(channel_id, "Sorry, the user *" + mentor + "* does not exist!")

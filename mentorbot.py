@@ -87,6 +87,8 @@ def addMentor():
         return "You do not have permission to use this command."
 
     mentor = request.forms.get("text")
+    if mentor in mentors:
+        return mentor + " is already a mentor."
     channel_id = request.forms.get("channel_id")
     print(sc.api_call(
         "channels.invite",

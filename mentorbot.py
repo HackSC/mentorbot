@@ -184,4 +184,5 @@ def sendMentorFinish(channel, text):
 
 if __name__ == "__main__":
     # activates and runs the server
-    run(host='0.0.0.0', port=8080)
+    port = int(os.environ.get("PORT", 5000))
+    run(host='0.0.0.0', port=port)

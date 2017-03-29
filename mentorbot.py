@@ -15,7 +15,7 @@ sc = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 
 # channels
 channels = {}
-channels["mentor"] = "#developers"
+channels["mentor"] = "#bot_testing_channel"
 
 # List of all mentors
 mentors = []
@@ -71,8 +71,9 @@ def setMentorChannel():
     mentorChannel = request.forms.get("text")
     user_id = request.forms.get("user_id")
     channel_id = request.forms.get("channel_id")
-    channels = sc.api_call(channels.list)
-    if mentorChannel not in channels:
+    channelsList = sc.api_call(channels.list)
+    print channelsList
+    if mentorChannel not in channelsList:
         sendTextMessage(channel_id, "The channel *" + mentorChannel + "* does not exist!")
     else:
         channels["mentor"] = "#" + mentorChannel

@@ -245,16 +245,5 @@ def sendMentorFinish(channel, text):
 
 if __name__ == "__main__":
     # activates and runs the server
- api_call = sc.api_call("users.list")
-    if api_call.get('ok'):
-        # retrieve all users so we can find our bot
-        users = api_call.get('members')
-        for user in users:
-            if 'name' in user and user.get('name') == mentorbot:
-                print("Bot ID for '" + user['name'] + "' is " + user.get('id'))
-    else:
-        print("could not find bot user with the name mentorbot")
-
-
     port = int(os.environ.get("PORT", 5000))
     run(host='0.0.0.0', port=port)

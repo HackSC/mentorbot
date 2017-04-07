@@ -146,7 +146,6 @@ def buttons():
             "mpim.open",
             users=mentee_id + "," + mentor_id + "," + BOT_ID
         ))
-        print (new_im)
         sendMentorFinish(new_im["group"]["name"], "Hey there! " + mentor_name + " will be able to help you.")
         sc.api_call(
             "chat.update",
@@ -246,5 +245,6 @@ def sendMentorFinish(channel, text):
 
 if __name__ == "__main__":
     # activates and runs the server
+    print (sc.api_call("users.list"))
     port = int(os.environ.get("PORT", 5000))
     run(host='0.0.0.0', port=port)

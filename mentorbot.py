@@ -155,6 +155,7 @@ def buttons():
             "mpim.open",
             users=mentee_id + "," + mentor_id + "," + BOT_ID
         ))
+        print(new_im)
         sendMentorFinish(new_im["group"]["name"], "Hey there! " + mentor_name + " will be able to help you.")
         sc.api_call(
             "chat.update",

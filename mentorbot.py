@@ -21,8 +21,8 @@ channels["mentor"] = "#mentorschannel"
 admins = ['organizer-sampurna', 'jaminche', 'justinhe']
 
 # List of all mentors
-mentors = ['msharan', 'nathanyang', 'justinhe', 'aqshi', 'dmdsouza', 'jaminche', 'janson', 'jeff_chen', 'jonluca', 'jwang', 'kryptonite', 'mark.klein', 'matthelb', 'navaneek', 'organizer-sampurna', 'sagarp', 'snidelyhazel', 'tonytu']
-
+# mentors = ['msharan', 'nathanyang', 'justinhe', 'aqshi', 'dmdsouza', 'jaminche', 'janson', 'jeff_chen', 'jonluca', 'jwang', 'kryptonite', 'mark.klein', 'matthelb', 'navaneek', 'organizer-sampurna', 'sagarp', 'snidelyhazel', 'tonytu']
+mentors = ['justinhe','wwillie','abrar','andrewszot','aqshi','chaitanya','cjglover','coding_idiot','conorhay','dkoo','dmdsouza','ethan_yu','jaminche','janson','jasmine','jeff_chen','jonluca','jwang','jzeiders','kryptonite','mark.klein','matthelb','mayukhdas','melanie_h','mentor-maegan','msharan','nathanyang','navaneek','nisha','nishir','organizer-sampurna','respiritu','sagarp','snidelyhazel','talab','tonytu','vivek']
 # List of active mentors
 activeMentors = []
 
@@ -155,7 +155,6 @@ def buttons():
             "mpim.open",
             users=mentee_id + "," + mentor_id + "," + BOT_ID
         ))
-        print(new_im)
         sendMentorFinish(new_im["group"]["name"], "Hey there! " + mentor_name + " will be able to help you.")
         sc.api_call(
             "chat.update",

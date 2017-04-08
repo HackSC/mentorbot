@@ -15,13 +15,13 @@ sc = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 
 # channels
 channels = {}
-channels["mentor"] = "#bot_testing_channel"
+channels["mentor"] = "#mentorschannel"
 
 # List of admins
-admins = ['sampurna', 'jaminche']
+admins = ['organizer-sampurna', 'jaminche', 'justinhe']
 
 # List of all mentors
-mentors = []
+mentors = ['msharan', 'nathanyang', 'justinhe', 'aqshi', 'dmdsouza', 'jaminche', 'janson', 'jeff_chen', 'jonluca', 'jwang', 'kryptonite', 'mark.klein', 'matthelb', 'navaneek', 'organizer-sampurna', 'sagarp', 'snidelyhazel', 'tonytu']
 
 # List of active mentors
 activeMentors = []
